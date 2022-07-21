@@ -32,25 +32,28 @@
     font-size: 22px;
 }
 
+.category-form-body,
 .form-body {
     display: flex;
     flex-direction: column;
     margin: 1em 2em;
 }
 
-.form-body div label{
+.category-form-body div label {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.form-body div img {
+.category-form-body div img {
     margin-right: 1em;
 }
 
+.category-form-body input,
+.category-form-body textarea,
+.category-form-body div,
 .form-body input,
-.form-body textarea,
-.form-body div {
+.form-body textarea {
     margin: 0.5em 0;
     padding: 0.5em;
     background: #243445;
@@ -59,6 +62,16 @@
     color: #707172;
     font-size: 13.6221px;
     font-weight: 300;
+}
+
+.form-body div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-body div input, .form-body div label{
+    width: 45%;
 }
 
 .buttonCreate,

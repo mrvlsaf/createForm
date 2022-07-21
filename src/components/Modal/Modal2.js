@@ -1,5 +1,5 @@
 import './Modal.css';
-import attach from '../Data/attach.png';
+import iconOrder from '../Data/iconOrder.png';
 import { useState } from 'react';
 
 function Modal(props) {
@@ -7,7 +7,6 @@ function Modal(props) {
     const [value, setValue] = useState('');
     const [mail, setMail] = useState('');
     const [error, setError] = useState(null);
-    const [comp, setComp] = useState(false); 
 
     const handleChange = (event) => {
         setValue(event.target.value);
@@ -15,13 +14,6 @@ function Modal(props) {
 
     function isValidEmail(email) {
         return /\S+@\S+\.\S+/.test(email);
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // const categoryData = new FormData(event.target);
-        props.parentCallback(event.target);
-        // console.log(categoryData.get('categoryName'));
     }
 
     const validateEmail = event => {
@@ -33,11 +25,6 @@ function Modal(props) {
         setMail(event.target.value);
     }
 
-    const createComponent = () => {
-        setComp(true)
-
-    }
-
     if (!props.show) {
         return null;
     }
@@ -47,43 +34,41 @@ function Modal(props) {
             <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <div className="modal-header">
                     {props.type === "category" ? (
-                        <h4 className="modal-title">Create New Category</h4>
+                        <h4 className="modal-title">View Category Details</h4>
                     ) : (
-                        <h4 className="modal-title">Create New Form</h4>
+                        <h4 className="modal-title">Edit Form Details</h4>
                     )}
                 </div>
                 <div className="modal-body">
                     {props.type === "category" ? (
-                        <form id='form-ss' onSubmit={handleSubmit} className='category-form-body'>
+                        <form id='form-ss' className='category-form-body'>
                             <div>
-                                <input type="file" accept="image/*" placeholder='Select an icon' style={{ display: 'none' }}
-                                    id="uploadFile" />
-                                <label htmlFor="uploadFile">Select an icon<img src={attach} alt="attach" /></label>
+                                Category Name: <span>Order</span>
+                                <img src={iconOrder} alt="icon"/>
                             </div>
-                            <input type="text" required name="categoryName" placeholder='Enter category name' />
-                            <textarea required name="categoryDescription" placeholder='Enter category description' rows="4" />
+                            <div>Category Description: <span>soem random description about the category lets eseee lorem ipsum laorcm fc fjfv fffvdf</span></div>
                         </form>
                     ) : (
                         <div>
                             <form id='form-ss' className='form-body'>
                                 <div>
-                                    <input type="text" required name="name" placeholder="Full Name" />
-                                    <input type="email" required name="email" placeholder='Email' onChange={validateEmail} />
+                                    <input type="text" value="Devraj Singh" required name="name" placeholder="Full Name" />
+                                    <input type="email" value="dsdevrajsingh55555@gmail.com" required name="email" placeholder='Email' onChange={validateEmail} />
                                     {error && <h4 style={{ color: 'red', position: 'absolute', right: 490, top:170 }}>{error}</h4>}
                                 </div>
                                 <div>
-                                    <input type="number" required name="aadhar" placeholder='Aadhar Number' />
-                                    <input type="number" required name="phoneNumber" placeholder='Phone Number' />
+                                    <input type="number" value="8860354705" required name="aadhar" placeholder='Aadhar Number' />
+                                    <input type="number" value="8860354705" required name="phoneNumber" placeholder='Phone Number' />
                                 </div>
-                                <textarea name="description" placeholder='Description (optional)' rows="4" />
+                                <textarea value="lorem ipsum sajndfsj fdf gf dgdgfdgdgdf ggffds gf fg f fg gf fggffggffg gfgfgffggg ggfgfggg d." placeholder='Description (optional)' rows="4" />
                                 <div>
-                                    <input type="text" required name="formName" placeholder='Form ID' />
+                                    <input type="text" value="Form-1" required name="formName" placeholder='Form ID' />
                                     <label required>
                                         Select form category
                                         <select required value={value} onChange={handleChange}>
-                                            <option value="fruit">Signup</option>
-                                            <option value="vegetable">Donation</option>
-                                            <option value="meat">Contact</option>
+                                            <option value="Signup">Signup</option>
+                                            <option value="Donation">Donation</option>
+                                            <option value="Contact">Contact</option>
                                         </select>
                                     </label>
                                 </div>
@@ -92,7 +77,7 @@ function Modal(props) {
                     )}
                 </div>
                 <div className="modal-footer">
-                    <button className="buttonCreate" type='submit' form='form-ss'>Create</button>
+                    {props.type === "form" && <button className="buttonCreate" type='submit' form='form-ss'>Update</button>}
                     <button className="buttonClose" onClick={props.onClose}>Close</button>
                 </div>
             </div>
